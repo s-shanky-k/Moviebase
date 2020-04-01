@@ -1,11 +1,14 @@
 # MovieBase
 A website which makes use of the OMDB API to fetch details and displays them on the page. Users can Like movies and can also view most Liked movies by all users
 
-
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine. 
+### Installing
 How to setup Flask: https://www.youtube.com/watch?v=QjtW-wnXlUY
 
 How to install postgreSQL: https://www.youtube.com/watch?v=e1MwsT5FJRQ
 
+### DB Creation
 To create database:
 ```
 1)  After installing postgreSQl, open SQL Shell (psql).
