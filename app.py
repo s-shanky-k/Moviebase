@@ -1,5 +1,5 @@
 from flask import Flask , render_template , url_for , request ,flash , redirect ,session, json
-#from flask_sqlalchamey import SQLAlchemy
+from config import config
 import os
 import psycopg2
 from psycopg2 import Error
@@ -13,13 +13,16 @@ b_name=' '
 Bootstrap(app)
 app.secret_key = 'super secret'
 def connect_db():
-    connection = psycopg2.connect(host="localhost",
-                                database="movie",
-                                user="postgres",
-                                port="5432",
-                                password="0000")
+    conn = None
     
     try:
+        # read connection parameters
+        params = config()
+ 
+        # connect to the PostgreSQL server
+        print('Connecting to the PostgreSQL database...')
+        conn = psycopg2.connect(**params)
+             
         return connection
         print("CONNECTED")
     except:
