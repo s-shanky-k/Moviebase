@@ -12,9 +12,9 @@ To create database:
 
 2)  Enter your Server(localhost), Database(postgres), Port(5432), Username(postgres) and Password(which you gave earlier while installing).
 
-3)  After this, run all the commands/queries given in the query.sql file
-To make user experience better, insert the sample queries given in query.sql
+3)  After this, run all the commands/queries given in the movie.sql file
 
-Make changes: In database.ini file, change password= the one which you gave earlier while installing postgreSQL
+
+Make changes: In database.ini file, change password = the one which you gave earlier while installing postgreSQL
 
 After doing all these, run python app.py
