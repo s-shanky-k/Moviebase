@@ -1,5 +1,6 @@
 from flask import Flask , render_template , url_for , request ,flash , redirect ,session, json
 import os
+from config import config
 import psycopg2
 from psycopg2 import Error
 from flask_bootstrap import Bootstrap
@@ -12,15 +13,19 @@ b_name=' '
 Bootstrap(app)
 app.secret_key = 'super secret'
 def connect_db():
-    connection = psycopg2.connect(host="localhost",
-                                database="movie",
-                                user="postgres",
-                                port="5432",
-                                password="0000")
+    """ Connect to the PostgreSQL database server """   
+    conn = None
     
     try:
-        return connection
-        print("CONNECTED")
+        # read connection parameters
+        params = config()
+ 
+        # connect to the PostgreSQL server
+        print('Connecting to the PostgreSQL database...')
+        conn = psycopg2.connect(**params)
+           
+        return conn
+        
     except:
         print("cant connect")
 
@@ -57,10 +62,12 @@ def check_pass(pwd):
 def index():
     return render_template('home.html')
 
+#HOME PAGE
 @app.route('/home')
 def home():
     return render_template('home.html')
 
+#REDIRECTING TO LOGIN PAGE
 @app.route('/to_login')
 def to_login():
         return render_template('index.html')
@@ -98,11 +105,12 @@ def login():
         return render_template("index.html",flag=f)
 
         
-#SIGN UP PAGE
+#REDIRECTING TO SIGN UP PAGE
 @app.route('/to_signup')
 def to_signup():
     return render_template('signup.html')
 
+#SIGN UP PAGE
 @app.route('/signup', methods=['GET','POST'])
 def signup():
     
@@ -165,6 +173,7 @@ def like():
         return jsonify(id_dict)
     return render_template('success.html')
 
+#FETCHING LIKED MOVIES
 @app.route('/liked_movies',methods=['GET','POST'])
 def liked_movies():
 
@@ -176,7 +185,7 @@ def liked_movies():
     print(result)
     return render_template('liked_movies.html',result=result)
 
-#FOR MOVIEBOARD
+#LIST OUT MOVIES IN MOVIEBOARD
 @app.route('/movieboard')
 def movieboard():
     conn=connect_db()
