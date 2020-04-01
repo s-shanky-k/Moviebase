@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+MOVIE BASE
+{% endblock title %}
+
+{% block head %}
+    <center>
+    <h1 style="font-family:fantasy;">Login<h1>
+    </center>
+   
+{% endblock head %}
+
+{% block body %}
+   
+    <div align="center" style="font-family:fantasy;margin-top: 1.5%;">
+        {% block pop %}
+            {% if flag == 1 %}
+                Wrong password
+            {% endif %}
+            {% if flag == 2 %}
+                Email id does not exists
+            {% endif %}
+        {% endblock pop %}
+    </div>
+
+    
+    <div align="center" style="background-color: #202020;width:30%;height:200px;margin: auto;margin-top: 5%; ">
+        <table class ="table table-borderless bg-warning" style="text-align: center;border-radius:15px;">
+            <form action="{{ url_for('login') }}" method="POST">
+                <tr>
+                    <td style="font-family:fantasy;">Email ID</td><td><input type="text" style="background-color:#202020; color:#ffc107; border-color: #202020;" name="email" placeholder="Enter email"></td>
+                </tr>
+                <tr>
+                    <td style="font-family:fantasy;" >Password</td><td><input type="password" name="pass_word"  style="background-color:#202020; color:#ffc107; border-color: #202020;" placeholder="Enter password"></td>
+                </tr>
+                <tr><td colspan="2">
+                <input  class="btn btn-dark" style="font-family:fantasy;" type="submit" value="Submit">
+                </td>
+                </tr>
+            </form> 
+        </table>
+        <h7 style="font-family:fantasy;">Dont have an account?</h7>
+        <a href= "{{ url_for('to_signup') }}" style="font-family:fantasy;">Sign Up</a>
+    </div>
+   
+
+
+{% endblock body%}
