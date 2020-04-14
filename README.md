@@ -27,6 +27,6 @@ To create database:
 ```
 Make changes: In database.ini file, change password = the one which you gave earlier while installing postgreSQL
 
-As a head start run the queries in the head_start.sql file on PSQL shell
+As a head start run the queries in the **head_start.sql** file on PSQL shell
 
-After doing all these, run python app.py
+After doing all these, run **python app.py**
