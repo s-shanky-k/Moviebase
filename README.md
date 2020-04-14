@@ -10,9 +10,9 @@ How to setup Flask: https://www.youtube.com/watch?v=QjtW-wnXlUY
 How to install postgreSQL: https://www.youtube.com/watch?v=e1MwsT5FJRQ
 #### Numpy
 pip install numpy
-### Pandas
+#### Pandas
 pip install pandas
-### sklearn
+#### sklearn
 pip install sklearn
 
 
