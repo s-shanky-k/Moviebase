@@ -1,0 +1,100 @@
+{% extends 'base_user.html' %}
+{% block head %}
+    <center>
+    <h1 style="font-family:fantasy;" >LIKED MOVIES<h1>
+    </center>
+{% endblock head %}
+
+
+{% block body %}
+{% if l == 0 %} 
+<center><h5>You Haven't Liked any Movies Yet !</h5></center>
+{% else %}
+    <table class="table table-hover table-dark text-warning" style="text-align:center;">
+        <tbody>
+            {% for i in result %}
+            <tr>
+                <td  data-toggle="modal" data-target=".bd-example-modal-lg" class="name">{{ i[1] }}</td>
+                <td align="right" width="3%">
+                <button type="button" id="remove" class="btn btn-danger btn-sm" style="float: right;"> X </button>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endif %}
+  <!-- Modal -->
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Info</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body bg-warning">
+          
+        </div>
+        <div class="modal-footer bg-dark">
+          <button type="button" class="btn btn-warning"data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+    <script>
+        
+        $(document).ready(function(){
+            $(".name").on('click',function(){
+                var title;
+                title=$(this).text();
+                $.ajax({
+                    type:'GET',
+                    url:"http://www.omdbapi.com/?t="+title+"&apikey=1dbc5c2c",
+                    dataType:'json',
+                    success: function(data){ 
+                       $(".modal-body").html('<img src ="'+ data.Poster +'" style="height:293px ;position:absolute; left:70%; top:3%;">' +
+                                            '<table class="table table-dark bg-warning text-dark">' +
+                                            '<tr><th> Title </th><td>' + data.Title + '</td></tr>' +
+                                            '<tr><th> Year</th><td>' + data.Year + '</td></tr>' +
+                                            '<tr><th> Rated</th><td>' + data.Rated + '</td></tr>' +
+                                            '<tr><th> Released</th><td>' + data.Released + '</td></tr>' +
+                                            '<tr><th> Genre</th><td>' + data.Genre + '</td></tr>' +
+                                            '<tr><th> Actors</th><td>' + data.Actors + '</td></tr>' +
+                                            '<tr><th> Director</th><td>' + data.Director + '</td></tr>' +
+                                            '<tr><th> Plot</th><td>' + data.Plot+ '</td></tr>' +
+                                            '<tr><th> Language</th><td>' + data.Language + '</td></tr>' +
+                                            '<tr><th> Awards</th><td>' + data.Awards+ '</td></tr></table>');                                                
+                            
+                    }
+                            
+            });
+        });
+        $(".btn-sm").on('click',function(){
+              var row=$(this).parent().parent()
+              title=$(this).parent().siblings().text();
+              $.ajax({
+                        type: 'POST',
+                        url: 'dislike',
+                        data: JSON.stringify({
+                              'name':title
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',
+                        success:function(temp){
+                            row.hide();
+                        }
+                    });
+              console.log(title);
+        })
+
+    });
+        
+    </script>
+
+
+    
+{% endblock body %}

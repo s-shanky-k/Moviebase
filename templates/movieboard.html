@@ -1,0 +1,87 @@
+{% extends 'base_user.html' %}
+{% block head %}
+    <center>
+    <h1 style="font-family:fantasy;" >MOVIEBOARD<h1>
+    </center>
+{% endblock head %}
+{% block body %}
+<table class="table table-hover table-dark text-warning" style="text-align:center;">
+   <thead class="active">
+        <th  style="color:black;">Movie Name</th>
+        <th  style="color:black;">Likes</th>
+    </thead>
+    {% for i in most_liked %}
+    <tr data-toggle="modal" data-target=".bd-example-modal-lg">
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}<td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg ">
+    <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title" id="exampleModalScrollableTitle" >Info</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body bg-warning">
+          
+        </div>
+        <div class="modal-footer bg-dark">
+        <div id='message'></div>
+           <input type="button" class="btn btn-warning" style="font-family:fantasy;" name="btn1" id="like" value="Like">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+    $(document).ready(function(){
+        var name;
+        $("tr").on("click",function(){
+            name=$(this).find("td:first").text();
+            $.ajax({
+                url: "http://www.omdbapi.com/?t="+name+"&apikey=1dbc5c2c",
+                method: "get",
+                dataType:"json",
+                success:function(data){
+                      $("#message").hide();                                                                               
+                      $(".modal-body").html('<img src ="'+ data.Poster +'" style="height:293px ;position:absolute; left:70%; top:3%;">' +
+                                  '<table class="table table-dark bg-warning text-dark">' +
+                                  '<tr><th> Title </th><td>' + data.Title + '</td></tr>' +
+                                  '<tr><th> Year</th><td>' + data.Year + '</td></tr>' +
+                                  '<tr><th> Rated</th><td>' + data.Rated + '</td></tr>' +
+                                  '<tr><th> Released</th><td>' + data.Released + '</td></tr>' +
+                                  '<tr><th> Genre</th><td>' + data.Genre + '</td></tr>' +
+                                  '<tr><th> Actors</th><td>' + data.Actors + '</td></tr>' +
+                                  '<tr><th> Director</th><td>' + data.Director + '</td></tr>' +
+                                  '<tr><th> Plot</th><td>' + data.Plot+ '</td></tr>' +
+                                  '<tr><th> Language</th><td>' + data.Language + '</td></tr>' +
+                                  '<tr><th> Awards</th><td>' + data.Awards+ '</td></tr></table>');                                                
+                      $("#like").on('click',function(){
+                        $.ajax({
+                            type: 'POST',
+                            url: 'like',
+                            data: JSON.stringify({
+                                'id':data.imdbID,
+                                'name':data.Title
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: 'json',
+                            success:function(temp){
+                                $("#message").html("You Liked "+data.Title);
+                                $("#message").show();
+
+                            }
+                        });                               
+                     });        
+                }
+            });
+            console.log(name);
+        });
+    });
+</script>
+{% endblock body %}
