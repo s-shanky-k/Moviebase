@@ -25,7 +25,20 @@ To create database:
 
 3)  After this, run all the commands/queries given in the movie.sql file
 ```
-
 Make changes: In database.ini file, change password = the one which you gave earlier while installing postgreSQL
+#### As a head start try running these commands in the PSQL command prompt
+insert into users values('user1','user1@gmail.com',1000);
+insert into users values('user2','user2@gmail.com',1000);
+
+insert into liked values('user1@gmail.com','tt5817168', 'Terminator');
+insert into liked values('user1@gmail.com','tt7286456', 'Joker');
+insert into liked values('user1@gmail.com','tt0119654', 'Men in Black');
+insert into liked values('user1@gmail.com','tt0107290', 'Jurassic Park');
+
+insert into liked values('user2@gmail.com','tt5817168', 'Terminator');
+insert into liked values('user2@gmail.com','tt0499549', 'Avatar');
+insert into liked values('user2@gmail.com','tt0119654', 'Men in Black');
+insert into liked values('user2@gmail.com','tt0107290', 'Jurassic Park');
+
 
 After doing all these, run python app.py
