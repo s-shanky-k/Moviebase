@@ -9,11 +9,11 @@ How to setup Flask: https://www.youtube.com/watch?v=QjtW-wnXlUY
 #### Postgres
 How to install postgreSQL: https://www.youtube.com/watch?v=e1MwsT5FJRQ
 #### Numpy
-pip install numpy
+```pip install numpy```
 #### Pandas
-pip install pandas
+```pip install pandas```
 #### sklearn
-pip install sklearn
+```pip install sklearn```
 
 
 ### DB Creation
@@ -27,6 +27,6 @@ To create database:
 ```
 Make changes: In database.ini file, change password = the one which you gave earlier while installing postgreSQL
 
-As a head start, run the queries in the **head_start.sql** file on PSQL shell
+As a head start, run the queries in the **head_start.sql** file on PSQL shell 
 
 After doing all these, run **python app.py**
