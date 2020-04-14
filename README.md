@@ -4,9 +4,17 @@ A website which makes use of the OMDB API to fetch details and displays them on 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine. 
 ### Installing
+#### Flask
 How to setup Flask: https://www.youtube.com/watch?v=QjtW-wnXlUY
-
+#### Postgres
 How to install postgreSQL: https://www.youtube.com/watch?v=e1MwsT5FJRQ
+#### Numpy
+pip install numpy
+### Pandas
+pip install pandas
+### sklearn
+pip install sklearn
+
 
 ### DB Creation
 To create database:
