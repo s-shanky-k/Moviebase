@@ -1,4 +1,6 @@
 # MovieBase
+A website which makes use of the **OMDB API** to fetch movie details and provides users with content-based recommendations based on the movies that the user has liked.
+
 A website which makes use of the **OMDB API** to fetch details and displays them on the page. Users can search for movies and read details about these movies. Users can also like movies. The website has a **MovieBoard** where one can view the most liked movies by all users. The website also comprises of a **Machine Learning Recommendation Engine** which provides the user with content-based recommendations based on the movies that the user has liked.  
 
 ## Getting Started
